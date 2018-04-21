@@ -1,0 +1,6 @@
+V2 Changelog
+============
+Created an array to store UIButtons (outlet collection).
+Command+click to rename connections.  Do not rename in method, otherwise connection will be broken.
+Emojis are now stored in an Array<String> called emojiChoices.  Every card has its own emoji.
+Use if let <varname> to check if the variable is set and to prevent crashes.  See line 47 in ViewController.swift.
