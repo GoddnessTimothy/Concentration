@@ -1,18 +1,18 @@
 Version 1
 ==========
 Setting up basic github repo:
-    1.  Xcode->preferences->accounts and setup github account.  Enable source contorl too (under source control).
-    2.  Click on source control navigator (right next to file manager) and create a new remote, which allows commiting and pushing to your github repo.  Otherwise, all changes will be local.
-    3.  Create brances so that master branch will always be working.
-    4.  right-click branch->checkout to push changes on that branch.
+1.  Xcode->preferences->accounts and setup github account.  Enable source contorl too (under source control).
+2.  Click on source control navigator (right next to file manager) and create a new remote, which allows commiting and pushing to your github repo.  Otherwise, all changes will be local.
+3.  Create brances so that master branch will always be working.
+4.  right-click branch->checkout to push changes on that branch.
 Basic working Concentration game.
 Venn-diagram looking icon triggers assistant editor which splits screen with ViewController.swift and allows you to create actions and outlets.
 Left panel has a property panel which allows you to grpahically change the properties of UIButton, UILabel etc
-    You can change color, bgColor, backgroundImage etc.
-    Right-panel is file manager.  Lists all the files in xCode project.
+You can change color, bgColor, backgroundImage etc.
+Right-panel is file manager.  Lists all the files in xCode project.
 Story board has two buttons with two different emojis.
 Two buttons are connected to ViewController
-    ctrl+right-clicicking.  Creates an action.  (Change type to UIButton).
+ctrl+right-clicicking.  Creates an action.  (Change type to UIButton).
 Initially, buttons have orange background.  When clicked, emoji is shown.  When clicked again, emoji is hidden.  See method flipCard().
 Game has a flipCount label that is updated whenever either button is tapped.
 Use a property-observer (didSet)to minimize copying and pasting code.  Keeps instance variables in sync.
