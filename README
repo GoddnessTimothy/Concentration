@@ -1,10 +1,10 @@
 Version 1
 ==========
 Setting up basic github repo:
-1.  Xcode->preferences->accounts and setup github account.  Enable source contorl too (under source control).
-2.  Click on source control navigator (right next to file manager) and create a new remote, which allows commiting and pushing to your github repo.  Otherwise, all changes will be local.
-3.  Create brances so that master branch will always be working.
-4.  right-click branch->checkout to push changes on that branch.
+    1.  Xcode->preferences->accounts and setup github account.  Enable source contorl too (under source control).
+    2.  Click on source control navigator (right next to file manager) and create a new remote, which allows commiting and pushing to your github repo.  Otherwise, all changes will be local.
+    3.  Create brances so that master branch will always be working.
+    4.  right-click branch->checkout to push changes on that branch.
 Basic working Concentration game.
 Venn-diagram looking icon triggers assistant editor which splits screen with ViewController.swift and allows you to create actions and outlets.
 Left panel has a property panel which allows you to grpahically change the properties of UIButton, UILabel etc
