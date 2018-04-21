@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Concentration
-//
-//  Created by Timothy on 4/20/18.
-//  Copyright © 2018 Timothy. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

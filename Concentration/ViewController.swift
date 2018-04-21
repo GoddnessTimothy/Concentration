@@ -48,12 +48,11 @@ class ViewController: UIViewController {
     */
     func flipCard(WithEmoji emoji: String, on button: UIButton) {
         //\() is similar to printf(%s, name);
-        print("flipCad(withEmoji: \(emoji)");
+        print("flipCad(withEmoji): \(emoji)");
         if(button.currentTitle == emoji) {
             button.setTitle("", for: UIControlState.normal);
             button.backgroundColor = UIColor.orange;
         } else {
-            //sweiwinewionweonewnweewio
             button.setTitle(emoji, for: UIControlState.normal);
             button.backgroundColor = UIColor.white;
         }
