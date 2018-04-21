@@ -53,6 +53,7 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControlState.normal);
             button.backgroundColor = UIColor.orange;
         } else {
+            //sweiwinewionweonewnweewio
             button.setTitle(emoji, for: UIControlState.normal);
             button.backgroundColor = UIColor.white;
         }
