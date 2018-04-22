@@ -2,8 +2,8 @@ import Foundation
 /*
     Difference between struct and class
     Two major differences:
-    Struct does not have inheritence.
-    Struct are value types and classes are reference types.
+        Struct does not have inheritence.
+        Struct are value types and classes are reference types.
     Value-types are copied (Int, Array, String)
     Reference types lives in heap.  are passing pointers around
  

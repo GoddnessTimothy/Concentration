@@ -42,7 +42,8 @@ class ViewController: UIViewController {
      */
     @IBOutlet var touchCards: [UIButton]!
     
-    //Not necessary to put data_type of array but I am keeping it
+    //Not necessary to put data_type of array but I am keeping it.
+    //Emojis can be added at Edit->emoji and symbols.
     var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎"];
     
     //This method is connected to first button on the storyboard
@@ -67,10 +68,10 @@ class ViewController: UIViewController {
     func updateViewFromModel() {
         for index in touchCards.indices {
             //Set buttons on storyboard to be button at current index.
-            //Button is of type UIButton.
+            //button is of type UIButton.
             let button = touchCards[index];
             //card is of type Card (struct Card).
-            //cards is an array of cards
+            //cards is an array of cards found in Concentration class
             //Takes card at Index index from Card array and sets it to card.
             let card = game.cards[index];
             //checks if Card card isFaceUp.
@@ -92,14 +93,7 @@ class ViewController: UIViewController {
  
     //randomly generate and return an emoji String.
     func emojiRandomGenerator(for card: Card) -> String {
-        /*
-             if (emoji[card.identifier] != nil) {
-                return emoji[card.identifier]!
-             } else {
-                return "?";
-             }
-             Alternative syntax
-         */
+      
         if (emojiDict[card.identifier] == nil) {
             //Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
             //let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.
@@ -112,6 +106,14 @@ class ViewController: UIViewController {
                 emojiDict[card.identifier] = emoijiChoices.remove(at: randomIndex);
             }
         }
+        /*
+             if (emoji[card.identifier] != nil) {
+                return emoji[card.identifier]!
+             } else {
+                return "?";
+             }
+             Alternative short-hand syntax below.  If val at [card.identifier] is not nil, return val.  Otherwise, return "?".
+         */
         return emojiDict[card.identifier] ?? "?";
     }
 }
