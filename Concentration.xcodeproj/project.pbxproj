@@ -13,6 +13,8 @@
 		A5A8FF88208AC0890079649B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5A8FF86208AC0890079649B /* Main.storyboard */; };
 		A5A8FF8A208AC0890079649B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A8FF89208AC0890079649B /* Assets.xcassets */; };
 		A5A8FF8D208AC0890079649B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5A8FF8B208AC0890079649B /* LaunchScreen.storyboard */; };
+		A5DB544B208C3206003F8703 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB544A208C3206003F8703 /* Concentration.swift */; };
+		A5DB544D208C32E1003F8703 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB544C208C32E1003F8703 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		A5A8FF89208AC0890079649B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5A8FF8C208AC0890079649B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5A8FF8E208AC0890079649B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5DB544A208C3206003F8703 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		A5DB544C208C32E1003F8703 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 		A5A8FF81208AC0890079649B /* Concentration */ = {
 			isa = PBXGroup;
 			children = (
+				A5DB544A208C3206003F8703 /* Concentration.swift */,
+				A5DB544C208C32E1003F8703 /* Card.swift */,
 				A5A8FF82208AC0890079649B /* AppDelegate.swift */,
 				A5A8FF84208AC0890079649B /* ViewController.swift */,
 				A5A8FF86208AC0890079649B /* Main.storyboard */,
@@ -142,6 +148,8 @@
 			files = (
 				A5A8FF85208AC0890079649B /* ViewController.swift in Sources */,
 				A5A8FF83208AC0890079649B /* AppDelegate.swift in Sources */,
+				A5DB544B208C3206003F8703 /* Concentration.swift in Sources */,
+				A5DB544D208C32E1003F8703 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +287,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S44TUF56D5;
 				INFOPLIST_FILE = Concentration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tim.Concentration;
@@ -293,6 +302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S44TUF56D5;
 				INFOPLIST_FILE = Concentration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tim.Concentration;

@@ -1,2 +1,16 @@
-V3 Changelog
-============
+V3 Change log
+==============
+MVC (Model View Controller)
+Model: is the WHAT of your application (but not how it is displayed).
+    Knows how to match, flip cards but nothing about how it appears on screen
+Controller; is the HOW model is presented to the user (UI Logic).
+View: is your controller's minions.  Communicates with model to get UI.
+
+Controller can always talk directly to their model.
+The model and view should never speak to each other.
+The model is UI independent.  
+
+No longer need flipCard() because the logic is handled in updateViewFromModel();
+
+This version implements a Model View Controller to Concentration.
+
