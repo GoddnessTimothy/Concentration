@@ -1,26 +1,32 @@
 import UIKit
+//The model is in Concentration.swift
+//The storyboard is our View.
+//This is our Controller.
 
 //Be careful when copying and pasting buttons. Right-click button (on storyboard) to disconnect any unnecessary links (in 'touch up inside')
 class ViewController: UIViewController {
+    
     /*
-        not initialized until game is used.
-        lazy makes a var not initialized until someone actually uses it.
-        lazy vars counts as being initialized.
-        lazy vars cannot have a didSet{} (property observers).
-    */
+         Struct gets free initializer, but we have to specify how many cards pairs of cards to show.  Create our own in Concentration class, that takes a numOfPairOfCards:Int as a arguement.
+         This creates the connection between Controller and Model.
+         not initialized until game is used.
+         lazy makes a var not initialized until someone actually uses it.
+         lazy vars counts as being initialized.
+         lazy vars cannot have a didSet{} (property observers).
+     */
     lazy var game = Concentration(numberOfPairOfCards: (touchCards.count+1)/2);
     
     /*
-        Declaring variables:
-        var nameofvar: return_type
-        Swift require all instance variables (properties) HAS to be initialized.
-        Swift is STRONGLY typed but has STRONG type inference.
-        Swift knows that flipCard is initialized to an Int.
-        var flipCount: Int = 0;
-        Hold option and click on flipCard to verify data_type
-        var flipCard1 = "HELLO";
-        var flipCount = 0;
-    */
+         Declaring variables:
+         var nameofvar: return_type
+         Swift require all instance variables (properties) HAS to be initialized.
+         Swift is STRONGLY typed but has STRONG type inference.
+         Swift knows that flipCard is initialized to an Int.
+         var flipCount: Int = 0;
+         Hold option and click on flipCard to verify data_type
+         var flipCard1 = "HELLO";
+         var flipCount = 0;
+     */
     var flipCount: Int = 0 {
         //Property observer
         //Everytime flipCount is changed, the label will be updated.
@@ -29,22 +35,27 @@ class ViewController: UIViewController {
             flipCountLabel.text = "Flips: \(flipCount)";
         }
     }
-    /*
-        Outlet creates an instance variable.
-        UILabel cannot be inferred.  Has to be explicitly declared.
-        Notice that there is no initialization and that there is no error.
-    */
-    @IBOutlet weak var flipCountLabel: UILabel!
-    /*
-        Outlet collection (An array of UIButton)
-        Nil means an optional is not set
-        An optional is indicated by a '!' and has 2 states: set and unset.
-     */
-    @IBOutlet var touchCards: [UIButton]!
     
     //Not necessary to put data_type of array but I am keeping it.
     //Emojis can be added at Edit->emoji and symbols.
     var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎"];
+    
+    //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
+    var emojiDict = [Int:String]();
+    
+    /*
+         Outlet creates an instance variable.
+         UILabel cannot be inferred.  Has to be explicitly declared.
+         Notice that there is no initialization and that there is no error.
+     */
+    @IBOutlet weak var flipCountLabel: UILabel!
+    
+    /*
+         Outlet collection (An array of UIButton)
+         Nil means an optional is not set
+         An optional is indicated by a '!' and has 2 states: set and unset.
+     */
+    @IBOutlet var touchCards: [UIButton]!
     
     //This method is connected to first button on the storyboard
     @IBAction func touchButton(_ sender: UIButton) {
@@ -64,7 +75,7 @@ class ViewController: UIViewController {
         }
     }
     
-    //This is controller.  It controls logic of UIButtons.  It changes background colors based on whether cards are face-up or face-down.
+    //This method keeps View and Model in sync so that model reflects whatever changes are made in View.
     func updateViewFromModel() {
         for index in touchCards.indices {
             //Set buttons on storyboard to be button at current index.
@@ -88,12 +99,8 @@ class ViewController: UIViewController {
         }
     }
     
-    //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
-    var emojiDict = [Int:String]();
- 
     //randomly generate and return an emoji String.
     func emojiRandomGenerator(for card: Card) -> String {
-      
         if (emojiDict[card.identifier] == nil) {
             //Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
             //let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.

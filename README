@@ -4,13 +4,20 @@ MVC (Model View Controller)
 Model: is the WHAT of your application (but not how it is displayed).
     Knows how to match, flip cards but nothing about how it appears on screen
 Controller; is the HOW model is presented to the user (UI Logic).
-View: is your controller's minions.  Communicates with model to get UI.
+View: is your controller's minions.  Communicates with model to get UI.  Very generic.
 
-Controller can always talk directly to their model.
+Controller can always talk directly to their model.  Can talk to anyone.
 The model and view should never speak to each other.
-The model is UI independent.  
+    The model is UI independent.
+    View objects are generic (Buttons, labels) have no idea about the model.
+
+View to Controller has to be a blind and structured connection.
+    When doing connections in storyboard.  For ex: dragging a button to an outlet
+    Views cannot own data they display.
+A controllers job is to interpret/format Model information for the view.
+    Center of all communication
+Model can communicate with controller using a Notification and KVO.  (Model sends a radio signal and Controller tunes in to get those changes).
 
 No longer need flipCard() because the logic is handled in updateViewFromModel();
 
-This version implements a Model View Controller to Concentration.
-
+This version implements an Initial Model View Controller to Concentration.  Will be improved in V4.
