@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         //Putting '!' at end of an unset optional will crash app
         //let cardNumber = touchCards.index(of: sender)!;
         if let cardNumber : Int = touchCards.index(of: sender) {
+            //sends index of card flipped(tapped) to choseCard() which will flip the boolean isFaceUp to true.  isFaceUp is initialized to false.
             game.chooseCard(at: cardNumber);
             //Update view to be in sync with model
             updateViewFromModel();
@@ -61,22 +62,35 @@ class ViewController: UIViewController {
             print("Chosen card is not in collection.");
         }
     }
+    
+    //This is controller.  It controls logic of UIButtons.  It changes background colors based on whether cards are face-up or face-down.
     func updateViewFromModel() {
         for index in touchCards.indices {
+            //Set buttons on storyboard to be button at current index.
+            //Button is of type UIButton.
             let button = touchCards[index];
+            //card is of type Card (struct Card).
+            //cards is an array of cards
+            //Takes card at Index index from Card array and sets it to card.
             let card = game.cards[index];
-            if card.isFaceUp {
+            //checks if Card card isFaceUp.
+            if (card.isFaceUp) {
+                //emojiRandomGenerator() will return a random emoji (a string) and button will be set to that emoji.
+                //setTitle() takes a string(emoji),and UIControlState.
                 button.setTitle(emojiRandomGenerator(for: card), for: UIControlState.normal);
                 button.backgroundColor = UIColor.white;
             } else {
                 button.setTitle("", for: UIControlState.normal);
-                //If card is matched, make it black so that you can no longer see it.  Otherwise, flip it back face down.
-                button.backgroundColor = card.isMatched ? UIColor.black : UIColor.orange;
+                //If card is matched, make it black so that you can no longer see it.  Otherwise, flip it back face down.  (isMatched is initially false and isn't changed to true yet.  That's why faced-down card will have an orange background, not purple).
+                button.backgroundColor = card.isMatched ? UIColor.purple : UIColor.orange;
             }
         }
     }
-    var emoji = [Int:String]();
+    
+    //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
+    var emojiDict = [Int:String]();
  
+    //randomly generate and return an emoji String.
     func emojiRandomGenerator(for card: Card) -> String {
         /*
              if (emoji[card.identifier] != nil) {
@@ -86,7 +100,7 @@ class ViewController: UIViewController {
              }
              Alternative syntax
          */
-        if (emoji[card.identifier] == nil) {
+        if (emojiDict[card.identifier] == nil) {
             //Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
             //let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.
             //randomIndex needs to be an Int not an unsigned int.  Luckily, Int(), exists where Int is a struct and takes an unsigned int as an arguement.
@@ -94,10 +108,10 @@ class ViewController: UIViewController {
             if (emoijiChoices.count > 0) {
                 //Generates a random integer where max is emojiChoices.length()-1.
                 let randomIndex = Int(arc4random_uniform(UInt32(emoijiChoices.count)));
-                //remove any used emoji so there is never any duplicating random cards
-                emoji[card.identifier] = emoijiChoices.remove(at: randomIndex);
+                //remove any used emoji so there is never any duplicating random cards.
+                emojiDict[card.identifier] = emoijiChoices.remove(at: randomIndex);
             }
         }
-        return emoji[card.identifier] ?? "?";
+        return emojiDict[card.identifier] ?? "?";
     }
 }

@@ -1,5 +1,5 @@
 import Foundation
-
+//Model
 /*
     Difference between struct and class
     Two major differences:
@@ -11,11 +11,11 @@ import Foundation
 
 //This card is UI independent.  Does not need emojis.  Just how the game functions.
 struct Card {
-    var isFaceUp = false;
-    var isMatched = false;
+    var isFaceUp: Bool = false;
+    var isMatched: Bool = false;
     var identifier: Int;
     
-    static var identifierFactory = 0;
+    static var identifierFactory: Int = 0;
     
     static func getUniqueIdentifier() -> Int {
         identifierFactory += 1;
@@ -30,7 +30,4 @@ struct Card {
         //'My identifier'
         self.identifier = identifier;
     }
-    
-    
-    
 }

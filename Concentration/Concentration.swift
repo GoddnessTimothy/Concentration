@@ -14,8 +14,11 @@ import Foundation
  */
 class Concentration {
     //Read about init()
+    //Array of cards
     var cards = [Card]();
     
+    //Flips card initially face-down.
+    //if card is face-up, flips card back face-down.
     func chooseCard(at index: Int) {
         if (cards[index].isFaceUp) {
             cards[index].isFaceUp = false;
