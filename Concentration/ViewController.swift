@@ -1,11 +1,12 @@
 import UIKit
-//The model is in Concentration.swift
-//The storyboard is our View.
-//This is our Controller.
+/*
+    The model is in Concentration.swift
+    The storyboard is our View.
+    This is our Controller.
+ */
 
 //Be careful when copying and pasting buttons. Right-click button (on storyboard) to disconnect any unnecessary links (in 'touch up inside')
 class ViewController: UIViewController {
-    
     /*
          Struct gets free initializer, but we have to specify how many cards pairs of cards to show.  Create our own in Concentration class, that takes a numOfPairOfCards:Int as a arguement.
          This creates the connection between Controller and Model.
@@ -28,9 +29,11 @@ class ViewController: UIViewController {
          var flipCount = 0;
      */
     var flipCount: Int = 0 {
-        //Property observer
-        //Everytime flipCount is changed, the label will be updated.
-        //Keeps UI in sync with instance variables.
+        /*
+            Property observer
+            Everytime flipCount is changed, the label will be updated.
+            Keeps UI in sync with instance variables.
+        */
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)";
         }
@@ -38,10 +41,10 @@ class ViewController: UIViewController {
     
     //Not necessary to put data_type of array but I am keeping it.
     //Emojis can be added at Edit->emoji and symbols.
-    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎"];
-    
+    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎", "🦆", "👩‍👩‍👦‍👦", "💂🏻‍♀️", "👪", "👩‍👧‍👦", "👨‍❤️‍💋‍👨","👻", "🎃", "🐝","🐴", "🐙", "🐎"];
+   
     //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
-    var emojiDict = [Int:String]();
+    var emojiDict = Dictionary<Int, String>();
     
     /*
          Outlet creates an instance variable.
@@ -61,9 +64,10 @@ class ViewController: UIViewController {
     @IBAction func touchButton(_ sender: UIButton) {
         //print("Arg, a ghost!");
         flipCount += 1;
-        //Let defines constant.
-        //Putting '!' at end of an unset optional will crash app
-        //let cardNumber = touchCards.index(of: sender)!;
+        /*
+            Let defines constant.
+            Putting '!' at end of an unset optional will crash app
+        */
         if let cardNumber : Int = touchCards.index(of: sender) {
             //sends index of card flipped(tapped) to choseCard() which will flip the boolean isFaceUp to true.  isFaceUp is initialized to false.
             game.chooseCard(at: cardNumber);
@@ -75,14 +79,14 @@ class ViewController: UIViewController {
         }
     }
     
-    //This method keeps View and Model in sync so that model reflects whatever changes are made in View.
+    //This method keeps View and Model in sync so that model reflects whatever changes are made in View (storyboard).
     func updateViewFromModel() {
+        //Iterate through touchCard array
         for index in touchCards.indices {
             //Set buttons on storyboard to be button at current index.
             //button is of type UIButton.
             let button = touchCards[index];
             //card is of type Card (struct Card).
-            //cards is an array of cards found in Concentration class
             //Takes card at Index index from Card array and sets it to card.
             let card = game.cards[index];
             //checks if Card card isFaceUp.
@@ -94,18 +98,39 @@ class ViewController: UIViewController {
             } else {
                 button.setTitle("", for: UIControlState.normal);
                 //If card is matched, make it black so that you can no longer see it.  Otherwise, flip it back face down.  (isMatched is initially false and isn't changed to true yet.  That's why faced-down card will have an orange background, not purple).
-                button.backgroundColor = card.isMatched ? UIColor.purple : UIColor.orange;
+                button.backgroundColor = card.isMatched ? UIColor.clear : UIColor.orange;
             }
         }
     }
     
-    //randomly generate and return an emoji String.
+    
+    /*
+         Randomly generate and return an emoji String.
+         Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
+         let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.
+         randomIndex needs to be an Int not an unsigned int.  Luckily, Int(), exists where Int is a struct and takes an unsigned int as an arguement.
+         As long as there are still emojis to choose from... (choosing from an empty array will cause a problem.
+     
+        //Alternative (Swift) syntax
+        if (emojiDict[card.identifier] == nil), (emoijiChoices.count > 0) {
+            //Generates a random integer where max is emojiChoices.length()-1.
+            let randomIndex = Int(arc4random_uniform(UInt32(emoijiChoices.count)));
+            //remove any used emoji so there is never any duplicating random cards.
+            emojiDict[card.identifier] = emoijiChoices.remove(at: randomIndex);
+        }
+     
+        //Alternatie (Swift) syntax for line 143
+        if (emoji[card.identifier] != nil) {
+            return emoji[card.identifier]!
+         } else {
+            return "?";
+         }
+     
+         //Alternative short-hand syntax below.  If val at [card.identifier] is not nil, return val.  Otherwise, return "?". ('??' is not a typo).
+            return emojiDict[card.identifier] ?? "?";
+    */
     func emojiRandomGenerator(for card: Card) -> String {
         if (emojiDict[card.identifier] == nil) {
-            //Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
-            //let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.
-            //randomIndex needs to be an Int not an unsigned int.  Luckily, Int(), exists where Int is a struct and takes an unsigned int as an arguement.
-            //As long as there are still emojis to choose from... (choosing from an empty array will cause a problem.
             if (emoijiChoices.count > 0) {
                 //Generates a random integer where max is emojiChoices.length()-1.
                 let randomIndex = Int(arc4random_uniform(UInt32(emoijiChoices.count)));
@@ -113,14 +138,6 @@ class ViewController: UIViewController {
                 emojiDict[card.identifier] = emoijiChoices.remove(at: randomIndex);
             }
         }
-        /*
-             if (emoji[card.identifier] != nil) {
-                return emoji[card.identifier]!
-             } else {
-                return "?";
-             }
-             Alternative short-hand syntax below.  If val at [card.identifier] is not nil, return val.  Otherwise, return "?".
-         */
         return emojiDict[card.identifier] ?? "?";
     }
 }
