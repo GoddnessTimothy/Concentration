@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     
     //Not necessary to put data_type of array but I am keeping it.
     //Emojis can be added at Edit->emoji and symbols.
-    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎", "🦆", "👩‍👩‍👦‍👦", "💂🏻‍♀️", "👪", "👩‍👧‍👦", "👨‍❤️‍💋‍👨","👻", "🎃", "🐝","🐴", "🐙", "🐎"];
+    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎", "🦆", "👩‍👩‍👦‍👦", "💂🏻‍♀️", "👪", "👩‍👧‍👦", "👫"];
    
     //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
     var emojiDict = Dictionary<Int, String>();
@@ -109,7 +109,6 @@ class ViewController: UIViewController {
          Swift NEVER does automatic type-conversion.  As a result, you cannot go from a unsigned_int to an int.
          let randomIndex = arc4random_uniform(emoijiChoices.count); gives an error.
          randomIndex needs to be an Int not an unsigned int.  Luckily, Int(), exists where Int is a struct and takes an unsigned int as an arguement.
-         As long as there are still emojis to choose from... (choosing from an empty array will cause a problem.
      
         //Alternative (Swift) syntax
         if (emojiDict[card.identifier] == nil), (emoijiChoices.count > 0) {
@@ -131,6 +130,7 @@ class ViewController: UIViewController {
     */
     func emojiRandomGenerator(for card: Card) -> String {
         if (emojiDict[card.identifier] == nil) {
+            //IF there are still emojis to choose from... (choosing from an empty array will cause a problem.
             if (emoijiChoices.count > 0) {
                 //Generates a random integer where max is emojiChoices.length()-1.
                 let randomIndex = Int(arc4random_uniform(UInt32(emoijiChoices.count)));
@@ -139,5 +139,25 @@ class ViewController: UIViewController {
             }
         }
         return emojiDict[card.identifier] ?? "?";
+    }
+    
+    //This button will reset the game
+    @IBAction func resetGame(_ sender: UIButton) {
+        //Reset score to 0
+        flipCount = 0;
+        flipCountLabel.text = "Flips: \(flipCount)";
+        for index in touchCards.indices {
+            var cards = game.cards[index];
+            let button = touchCards[index];
+            if(cards.isFaceUp) {
+                cards.isFaceUp = false;
+                button.backgroundColor = UIColor.orange;
+                button.setTitle("", for: UIControlState.normal);
+            }
+            if(cards.isMatched) {
+                cards.isMatched = false;
+                button.backgroundColor = UIColor.orange;
+            }
+        }
     }
 }
