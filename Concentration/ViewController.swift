@@ -5,7 +5,7 @@ import UIKit
     This is our Controller.
  */
 
-//Be careful when copying and pasting buttons. Right-click button (on storyboard) to disconnect any unnecessary links (in 'touch up inside')
+//Be careful when copying and pasting buttons. Right-click button (on storyboard) to disconnect any unnecessary links (in 'touch up inside').
 class ViewController: UIViewController {
     /*
          Struct gets free initializer, but we have to specify how many cards pairs of cards to show.  Create our own in Concentration class, that takes a numOfPairOfCards:Int as a arguement.
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     
     //Not necessary to put data_type of array but I am keeping it.
     //Emojis can be added at Edit->emoji and symbols.
-    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎", "🦆", "👩‍👩‍👦‍👦", "💂🏻‍♀️", "👪", "👩‍👧‍👦", "👫"];
+    var emoijiChoices : Array<String> = ["👻", "🎃", "🐝", "🐴", "🐙", "🐎", "🦆", "👩‍👩‍👦‍👦", "💂🏻‍♀️", "👪", "👩‍👧‍👦", "👫", "🌈"];
    
     //Empty dictionary that takes a identifier(an int), and a String(the emoji) as a Key and Value pair.
     var emojiDict = Dictionary<Int, String>();
@@ -85,11 +85,11 @@ class ViewController: UIViewController {
         for index in touchCards.indices {
             //Set buttons on storyboard to be button at current index.
             //button is of type UIButton.
-            let button = touchCards[index];
             //card is of type Card (struct Card).
             //Takes card at Index index from Card array and sets it to card.
             let card = game.cards[index];
             //checks if Card card isFaceUp.
+            let button = touchCards[index];
             if (card.isFaceUp) {
                 //emojiRandomGenerator() will return a random emoji (a string) and button will be set to that emoji.
                 //setTitle() takes a string(emoji),and UIControlState.
@@ -101,8 +101,22 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? UIColor.clear : UIColor.orange;
             }
         }
+        print(game.matchedCount);
+        if(game.matchedCount == (game.cards.count/2)) {
+            print("last pair");
+            for indexes in touchCards.indices {
+                let button = touchCards[indexes];
+                button.backgroundColor = UIColor.orange;
+                button.setTitle("", for: UIControlState.normal);
+                var card = game.cards[indexes];
+                card.isFaceUp = true;
+                card.isMatched = false;
+            }
+            //reset flipcount
+            flipCount = 0;
+            flipCountLabel.text = "Flips: \(flipCount)";
+        }
     }
-    
     
     /*
          Randomly generate and return an emoji String.
@@ -139,25 +153,5 @@ class ViewController: UIViewController {
             }
         }
         return emojiDict[card.identifier] ?? "?";
-    }
-    
-    //This button will reset the game
-    @IBAction func resetGame(_ sender: UIButton) {
-        //Reset score to 0
-        flipCount = 0;
-        flipCountLabel.text = "Flips: \(flipCount)";
-        for index in touchCards.indices {
-            var cards = game.cards[index];
-            let button = touchCards[index];
-            if(cards.isFaceUp) {
-                cards.isFaceUp = false;
-                button.backgroundColor = UIColor.orange;
-                button.setTitle("", for: UIControlState.normal);
-            }
-            if(cards.isMatched) {
-                cards.isMatched = false;
-                button.backgroundColor = UIColor.orange;
-            }
-        }
     }
 }
